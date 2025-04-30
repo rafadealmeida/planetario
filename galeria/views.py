@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from galeria.models import Fotografia
 
 def index(request):
-    fotos = Fotografia.objects.all()
+    # fotos = Fotografia.objects.all()
     # fotos = Fotografia.objects.order_by("-data_fotografia")
-    return render(request, 'galeria/index.html', {'cards': fotos})
+    fotografia = Fotografia.objects.order_by("-data_fotografia").filter(publicada=True)
+    return render(request, 'galeria/index.html', {'cards': fotografia})
 
 def imagem(request,id):
     try:

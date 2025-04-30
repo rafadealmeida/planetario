@@ -3,8 +3,12 @@ from .models import Fotografia
 
 @admin.register(Fotografia)
 class FotografiaAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'legenda', 'descricao') 
+    list_display = ("id","nome","legenda","descricao","foto","publicada","data_fotografia")
+    list_display_links = ("nome","foto")
     search_fields = ("nome",)
+    list_filter = ("categoria",)
+    list_per_page = 4
+    list_editable = ("publicada",)
 
 
 # from django.contrib import admin
