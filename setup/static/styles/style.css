@@ -336,6 +336,11 @@ table {
     justify-content: space-between;
 }
 
+.principal-busca {
+    display: flex;
+    gap: 2rem;
+}
+
 .rodape {
     background-color: #04244F;
     width: 100%;

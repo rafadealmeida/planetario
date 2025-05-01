@@ -40,7 +40,7 @@
           </div>
         </div>
       </header>
-      <main class="principal">
+      <main class="principal-busca">
         <section class="menu-lateral">
           <nav class="menu-lateral__navegacao">
             <a href="{% url 'index' %}"
@@ -66,23 +66,44 @@
           </nav>
         </section>
         <section class="conteudo">
-          {% if card %}
-          <section class="imagem">
-            <div class="imagem__conteudo">
-              <img
-                class="imagem__imagem"
-                src="{% static 'assets/imagens/galeria/'|add:card.foto %}"
-              />
-              <div class="imagem__info">
-                <div class="imagem__texto">
-                  <p class="imagem__titulo">{{card.nome}}</p>
-                  <p class="imagem__descricao">{{card.legenda}}</p>
-                  <p class="imagem__texto">{{card.descricao}}</p>
+          <h1 class="imagem__texto">Resultado da busca por "{{ query }}"</h1>
+
+          <ul class="galeria__cards">
+            {% if resultados %} {% for fotografia in resultados %}
+            <li class="card">
+              <a href="{% url 'imagem' fotografia.id %}">
+                {% if not fotografia.foto %}
+                <img
+                  class="card__imagem"
+                  src="{% static '/assets/imagens/galeria/notfound.jpg' %}"
+                  alt="foto"
+                />
+                {% else %}
+                <img
+                  class="card__imagem"
+                  src="{{ fotografia.foto.url }}"
+                  alt="foto"
+                />
+                {% endif %}
+              </a>
+              <span class="card__tag">{{ fotografia.categoria }}</span>
+              <div class="card__info">
+                <p class="card__titulo">{{ fotografia.nome }}</p>
+                <div class="card__texto">
+                  <p class="card__descricao">{{ fotografia.legenda }}</p>
+                  <span>
+                    <img
+                      src="{% static '/assets/ícones/1x/favorite_outline.png' %}"
+                      alt="ícone de coração"
+                    />
+                  </span>
                 </div>
               </div>
-            </div>
-          </section>
-          {% endif %}
+            </li>
+            {% endfor %} {% else %}
+            <p class="imagem__texto">Nenhuma fotografia encontrada.</p>
+            {% endif %}
+          </ul>
         </section>
       </main>
     </div>
