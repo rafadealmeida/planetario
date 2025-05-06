@@ -69,10 +69,18 @@
           {% if card %}
           <section class="imagem">
             <div class="imagem__conteudo">
+              {% if card.foto == "" or card.foto == null %}
               <img
                 class="imagem__imagem"
                 src="{% static 'assets/imagens/galeria/'|add:card.foto %}"
               />
+              {% else %}
+              <img
+              class="card__imagem"
+              src="{{ card.foto.url }}"
+              alt="foto"
+            />
+            {% endif %}
               <div class="imagem__info">
                 <div class="imagem__texto">
                   <p class="imagem__titulo">{{card.nome}}</p>
