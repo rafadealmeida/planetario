@@ -25,3 +25,6 @@ def buscar(request):
         return HttpResponse("Imagem não encontrada", status=404)
 
     return render(request, 'galeria/buscar.html', {'resultados': resultados, 'query': query})
+
+def contato(request):
+    return render(request, 'galeria/contato.html')
